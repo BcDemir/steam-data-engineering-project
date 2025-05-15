@@ -1,0 +1,18 @@
+services:
+  myapp:
+    build: .
+    environment:
+      SAVE_STATE: "w"
+      # Define the range here starting form the end (Use negative values).
+      # Steam allows 100000 API calls per day
+      # The range is between Last_no which is 0 because the loop will start from the end and it will go till range_last.
+      LAST_NO: -1
+      RANGE_LAST: -100
+      INTERVALS: 100
+    volumes:
+      # Create a .env file and include the path you would like to use here
+      - "${LOCAL_JSON_DIR}:/json"
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    network_mode: "host"  # Use host network instead of custom bridge
